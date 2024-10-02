@@ -22,18 +22,24 @@ class LocalDB {
         )`);
     }
 
-    addNote(title, content, tag) {
-        return new Promise((resolve, reject) => {
-            const sql = 'INSERT INTO notes (title, content, tag) VALUES (?, ?, ?)';
-            this.db.run(sql, [title, content, tag], function (err) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve({ id: this.lastID, title, content, tag });
-                }
-            });
+addNote(title, content, tag) {
+    return new Promise((resolve, reject) => {
+        // Ensure title and content are provided
+        if (!title || !content) {
+            reject(new Error('Title and content are required.'));
+            return;
+        }
+
+        const sql = 'INSERT INTO notes (title, content, tag) VALUES (?, ?, ?)';
+        this.db.run(sql, [title, content, tag], function(err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve({ id: this.lastID, title, content, tag });
+            }
         });
-    }
+    });
+}
 
     getNotes() {
         return new Promise((resolve, reject) => {
