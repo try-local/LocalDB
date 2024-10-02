@@ -22,11 +22,10 @@ class LocalDB {
         )`);
     }
 
-    // Add a new note with title, content, and tag
     addNote(title, content, tag) {
         return new Promise((resolve, reject) => {
             const sql = 'INSERT INTO notes (title, content, tag) VALUES (?, ?, ?)';
-            this.db.run(sql, [title, content, tag], function(err) {
+            this.db.run(sql, [title, content, tag], function (err) {
                 if (err) {
                     reject(err);
                 } else {
@@ -36,7 +35,6 @@ class LocalDB {
         });
     }
 
-    // Retrieve all notes
     getNotes() {
         return new Promise((resolve, reject) => {
             const sql = 'SELECT * FROM notes ORDER BY created_at DESC';
@@ -50,11 +48,10 @@ class LocalDB {
         });
     }
 
-    // Delete a note by its ID
     deleteNote(id) {
         return new Promise((resolve, reject) => {
             const sql = 'DELETE FROM notes WHERE id = ?';
-            this.db.run(sql, id, function(err) {
+            this.db.run(sql, id, function (err) {
                 if (err) {
                     reject(err);
                 } else {
@@ -64,15 +61,14 @@ class LocalDB {
         });
     }
 
-    // Update an existing note
     updateNote(id, title, content, tag) {
         return new Promise((resolve, reject) => {
             const sql = 'UPDATE notes SET title = ?, content = ?, tag = ? WHERE id = ?';
-            this.db.run(sql, [title, content, tag, id], function(err) {
+            this.db.run(sql, [title, content, tag, id], function (err) {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(this.changes); // Returns the number of rows changed
+                    resolve(this.changes);
                 }
             });
         });
@@ -87,4 +83,4 @@ class LocalDB {
     }
 }
 
-module.exports = new LocalDB();
+module.exports = LocalDB;
