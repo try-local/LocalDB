@@ -2,7 +2,7 @@
   "name": "@trylocal/local.db",
   "version": "1.0.0",
   "description": "Local database for storing @trylocal/local.notes.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"No tests specified\" && exit 0"
   },
